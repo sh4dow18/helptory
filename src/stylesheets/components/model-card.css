@@ -1,0 +1,56 @@
+/* Main Classes Styles */
+/* Sorted Alphabetically */
+
+/* First Grade */
+
+.model-card-container {
+  /* Display */
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  border-radius: 1rem;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  /* Spacers */
+  margin: 1rem;
+  /* Texts */
+  text-align: center;
+  /* Colors */
+  border: 2px solid var(--black);
+}
+.model-card-container.selected {
+  /* Colors */
+  border-color: var(--primary);
+}
+.model-card-container.soon {
+  /* Colors */
+  filter: grayscale(100%);
+}
+.model-card-container:not(:is(.soon)):hover {
+  /* Display */
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/* Second Grade */
+
+.model-card-container img {
+  /* Display */
+  border-top-left-radius: 0.9rem;
+  border-top-right-radius: 0.9rem;
+}
+.model-card-container p {
+  /* Display */
+  border-bottom-left-radius: 0.9rem;
+  border-bottom-right-radius: 0.9rem;
+  /* Spacers */
+  padding: 0.5rem;
+  /* Texts */
+  font-size: 1.1rem;
+  font-weight: bold;
+  /* Colors */
+  background: linear-gradient(var(--primary), var(--black));
+  border-top: 2px solid var(--black);
+  color: var(--white);
+}
