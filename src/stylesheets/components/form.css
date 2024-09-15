@@ -1,0 +1,130 @@
+/* Main Tags Styles */
+/* Sorted Alphabetically */
+
+/* First Grade */
+
+.form-container {
+  /* Display */
+  width: 47rem;
+  /* Spacers */
+  margin: 2rem auto;
+}
+
+/* Second Grade */
+
+.form-container div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-container section {
+  /* Display */
+  display: flex;
+  flex-direction: column;
+  /* Spacers */
+  margin-block: 1rem;
+}
+.form-container > button[type="submit"] {
+  /* Display */
+  border-radius: 0.5rem;
+  user-select: none;
+  cursor: pointer;
+  /* Spacers */
+  padding: 1rem;
+  /* Texts */
+  font-size: 1rem;
+  font-weight: bold;
+  /* Colors */
+  background-color: var(--primary);
+  border: 1px solid var(--black);
+  color: var(--white);
+}
+.form-container > button[type="submit"]:disabled {
+  /* Colors */
+  background-color: #aaaaaa;
+}
+.form-container > button[type="submit"]:not(:disabled):hover {
+  /* Display */
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
+.form-container > button[type="submit"]:not(:disabled, :hover) {
+  /* Display */
+  transform: scale(1);
+  transition: transform 0.3s;
+}
+
+/* Third Grade */
+
+.form-container section * {
+  /* Spacers */
+  margin-block: 0.2rem;
+}
+.form-container section input {
+  /* Display */
+  border-width: 1px;
+}
+.form-container section :is(input, textarea, select) {
+  /* Spacers */
+  padding: 1rem;
+  /* Texts */
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.form-container section :is(input, textarea, select):focus-visible {
+  /* Colors */
+  outline: 1px solid var(--blue);
+}
+.form-container section :is(input, textarea, select)[aria-invalid="false"] {
+  /* Colors */
+  outline: 1px solid #00bb00;
+  border: 1px solid #00bb00;
+}
+.form-container section :is(input, textarea, select)[aria-invalid="true"] {
+  /* Colors */
+  outline: 1px solid #bb0000;
+  border: 1px solid #bb0000;
+}
+.form-container section label {
+  /* Texts */
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1rem;
+}
+.form-container section textarea {
+  /* Display */
+  resize: none;
+}
+.form-container section select {
+  /* Colors */
+  background-color: transparent;
+}
+.form-container section small {
+  /* Texts */
+  font-size: 0.9rem;
+}
+
+/* Media Queries */
+/* Sorted by Max Width */
+
+@media screen and (max-width: 750px) {
+  /* Main Classes Styles */
+  /* Sorted Alphabetically */
+
+  /* First Grade */
+
+  .form-container {
+    /* Display */
+    width: auto;
+  }
+}
+@media screen and (max-width: 703px) {
+  /* Main Classes Styles */
+  /* Sorted Alphabetically */
+
+  /* Second Grade */
+
+  .form-container div {
+    display: block;
+  }
+}

@@ -1,0 +1,24 @@
+/* Main Classes Styles */
+/* Sorted Alphabetically */
+
+/* First Grade */
+
+.results-container {
+  /* Display */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* Fourth Grade */
+
+.results-container section ul li {
+  /* Display */
+  list-style: none;
+  /* Spacers */
+  margin-block: 1rem;
+  padding: 1rem;
+  /* Colors */
+  background-color: #eee;
+  border: 2px solid var(--black);
+}

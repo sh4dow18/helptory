@@ -14,7 +14,9 @@ export default function RootLayout({
       <body>
         <header>
           {/* Project Name */}
-          <p>Helptory</p>
+          <Link href="/">
+            <p>Helptory</p>
+          </Link>
         </header>
         {/* Page Container */}
         <main>{children}</main>

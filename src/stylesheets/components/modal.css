@@ -1,0 +1,117 @@
+/* Main Tags Styles */
+/* Sorted Alphabetically */
+
+/* First Grade */
+
+/* If a modal is open, set this styles in body::before */
+body:has(.modal-container[open])::before {
+  /* Display */
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  /* Colors */
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Main Classes Styles */
+/* Sorted Alphabetically */
+
+/* First Grade */
+
+.modal-container {
+  /* Display */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  /* Texts */
+  text-align: center;
+  /* Colors */
+  border: 1px solid var(--black);
+  background-color: var(--white);
+}
+
+/* Second Grade */
+
+.modal-container button {
+  /* Display */
+  width: 100%;
+  /* Spacers */
+  padding: 0.8rem;
+  /* Texts */
+  font-size: 1rem;
+  cursor: pointer;
+  /* Colors */
+  border: none;
+  background-color: #ddd;
+}
+.modal-container :is(h3, p) {
+  /* Spacers */
+  margin: 1rem;
+}
+.modal-container img {
+  /* Display */
+  border-radius: 10rem;
+  /* Spacers */
+  margin-top: 1rem;
+  /* Colors */
+  border: 1px solid var(--black);
+}
+.modal-container p {
+  /* Display */
+  width: 20rem;
+}
+.modal-container.error button {
+  /* Colors */
+  border-bottom: 3px solid #ee0000;
+}
+.modal-container.error h3 {
+  /* Colors */
+  color: #ee0000;
+}
+.modal-container.error img {
+  /* Display */
+  width: 100px;
+  height: 100px;
+  /* Spacers */
+  padding: 0.5rem;
+}
+.modal-container.loading button {
+  /* Colors */
+  border-bottom: 3px solid #989898;
+}
+.modal-container.loading h3 {
+  /* Colors */
+  color: #989898;
+}
+.modal-container.success button {
+  /* Colors */
+  border-bottom: 3px solid #008800;
+}
+.modal-container.success h3 {
+  /* Colors */
+  color: #008800;
+}
+.modal-container.success img {
+  /* Colors */
+  background-color: #3ba55d;
+}
+
+/* Media Queries */
+/* Sorted by Max Width */
+
+@media screen and (max-width: 400px) {
+  /* Main Classes Styles */
+  /* Sorted Alphabetically */
+
+  /* First Grade */
+
+  .modal-container {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
