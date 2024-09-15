@@ -5,7 +5,6 @@ import "@/stylesheets/components/form.css";
 // Form Requirements
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Modal from "./modal";
-import Input from "./input";
 // Modal Settings Type
 type ModalSettings = {
   open: boolean;
