@@ -38,7 +38,7 @@ export default function RootLayout({
                 Braitec: Soluciones Tecnológicas
               </Link>{" "}
               {/* Last Update */}
-              13 de Septiembre del 2024
+              15 de Septiembre del 2024
             </p>
           </div>
         </footer>
