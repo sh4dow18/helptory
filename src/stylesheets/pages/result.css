@@ -22,3 +22,15 @@
   background-color: #eee;
   border: 2px solid var(--black);
 }
+
+@media screen and (max-width: 701px) {
+  /* Main Classes Styles */
+  /* Sorted Alphabetically */
+
+  /* First Grade */
+
+  .results-container {
+    /* Display */
+    display: block
+  }
+}

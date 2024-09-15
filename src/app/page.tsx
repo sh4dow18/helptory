@@ -97,15 +97,6 @@ export default function Home() {
               help="Números Positivos Solamente"
               validation="number"
             />
-            {/* Period in Days */}
-            <Input
-              label="Periodo en Días"
-              type="text"
-              name="P"
-              example="24"
-              help="Números Positivos Solamente"
-              validation="number"
-            />
           </div>
         </Form>
       </section>

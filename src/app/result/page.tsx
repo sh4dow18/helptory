@@ -26,6 +26,8 @@ export const metadata: Metadata = {
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
+// Force dynamism to ensure the correct calculation
+export const dynamic = "force-dynamic";
 // Result Page Main Function
 function ResultPage({ searchParams }: Props) {
   // Transform String Param to Number
@@ -41,17 +43,16 @@ function ResultPage({ searchParams }: Props) {
   const h = GetNumberFromParam("h");
   const u = GetNumberFromParam("u");
   const k = GetNumberFromParam("k");
-  const P = GetNumberFromParam("P");
   // Get Results
   const Q = GetOptimalProductionLotSizeQ(a, k, h, r, u);
-  const T = GetTimeBetweenTwoProductionRunsT(Q, a);
-  const f = GetFrequencyBetweenTwoProductionRunsf(T);
   const d = GetMaxDeficit(a, h, k, r, u);
-  const t2 = GetSecondTimeIntervalt2(u, k, a, r, h, P);
+  const t2 = GetSecondTimeIntervalt2(u, k, a, r, h);
   const S = GetMaxInventoryLevelS(a, t2);
-  const t1 = GetFirstTimeIntervalt1(S, r, a, P);
-  const t3 = GetThirdTimeIntervalt3(h, k, a, r, u, P);
-  const t4 = GetFourthTimeIntervalt4(d, r, a, P);
+  const t1 = GetFirstTimeIntervalt1(S, r, a);
+  const t3 = GetThirdTimeIntervalt3(h, k, a, r, u);
+  const t4 = GetFourthTimeIntervalt4(d, r, a);
+  const T = GetTimeBetweenTwoProductionRunsT(t1, t2, t3, t4);
+  const f = GetFrequencyBetweenTwoProductionRunsf(T);
   // Returns Result Page
   return (
     // Result Page Container with Main Title
@@ -88,10 +89,6 @@ function ResultPage({ searchParams }: Props) {
           <li>
             {/* Release Cost */}
             <strong>Costo por Lanzamiento (k):</strong> ${k}
-          </li>
-          <li>
-            {/* Period in Days */}
-            <strong>Periodo en Días (P):</strong> {P} días
           </li>
         </ul>
       </section>
