@@ -32,6 +32,10 @@ type Props = {
 };
 // Force dynamism to ensure the correct calculation
 export const dynamic = "force-dynamic";
+const modelsRecord: Record<string, string> = {
+  "epq-w-d": "EPQ con Déficit (Con Faltantes)",
+  "epq-wo-d": "EPQ sin Déficit (Sin Faltantes)",
+};
 // Result Page Main Function
 function ResultPage({ searchParams }: Props) {
   // Transform String Param to Number
@@ -72,7 +76,10 @@ function ResultPage({ searchParams }: Props) {
         <ul>
           <li>
             {/* Selected Model */}
-            <strong>Modelo Seleccionado:</strong> {searchParams["model"]}
+            <strong>Modelo Seleccionado:</strong>{" "}
+            {typeof searchParams["model"] === "string"
+              ? modelsRecord[searchParams["model"]]
+              : "Error"}
           </li>
           <li>
             {/* Constant Production Ratio */}
