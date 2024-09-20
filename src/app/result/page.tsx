@@ -4,17 +4,17 @@ import "@/stylesheets/pages/result.css";
 import { Page } from "@/components";
 import { Metadata } from "next";
 import {
-  GetDeficitCost,
   GetFirstTimeIntervalt1,
   GetFourthTimeIntervalt4,
   GetFrequencyBetweenTwoProductionRunsf,
-  GetInventoryCost,
   GetMaxDeficit,
   GetMaxInventoryLevelS,
   GetOptimalProductionLotSizeQ,
   GetSecondTimeIntervalt2,
   GetThirdTimeIntervalt3,
   GetTimeBetweenTwoProductionRunsT,
+  GetTotalDeficitCost,
+  GetTotalInventoryMaintenanceCost,
   GetTotalProductionCost,
   GetTotalUnitCost,
 } from "@/libs/math";
@@ -57,8 +57,8 @@ function ResultPage({ searchParams }: Props) {
   const t4 = GetFourthTimeIntervalt4(d, r, a);
   const T = GetTimeBetweenTwoProductionRunsT(t1, t2, t3, t4);
   const f = GetFrequencyBetweenTwoProductionRunsf(T);
-  const CI = GetInventoryCost(h, S, t1, t2);
-  const CD = GetDeficitCost(u, d, t3, t4);
+  const CI = GetTotalInventoryMaintenanceCost(h, S, t1, t2);
+  const CD = GetTotalDeficitCost(u, d, t3, t4);
   const CP = GetTotalProductionCost(k, f);
   const CU = GetTotalUnitCost(a, c);
   const CT = CI + CD + CP + CU;
@@ -148,7 +148,7 @@ function ResultPage({ searchParams }: Props) {
             <strong>Intervalo de Tiempo (T4):</strong> {t4} días
           </li>
           <li>
-            {/* Time Interval T4 */}
+            {/* Total Inventory Maintenance Cost */}
             <strong>Costo por Mantener en Inventario (C(I)):</strong> ${CI}
           </li>
           <li>
@@ -160,7 +160,7 @@ function ResultPage({ searchParams }: Props) {
             <strong>Costo por Producción Total (C(P)):</strong> ${CP}
           </li>
           <li>
-            {/* Total Production Cost */}
+            {/* Total Unit Cost */}
             <strong>Costo Total por Unidad (C(U)):</strong> ${CU}
           </li>
           <li>

@@ -90,15 +90,15 @@ export function GetFourthTimeIntervalt4(d: number, r: number, a: number) {
   const RESULT = d / (r - a);
   return Number.parseFloat(RESULT.toFixed(4));
 }
-// Get Inventary Costs
-export function GetInventoryCost(h: number, S: number, t1: number, t2: number) {
+// Get Total Inventary Maintenance Costs
+export function GetTotalInventoryMaintenanceCost(h: number, S: number, t1: number, t2: number) {
   const FIRST_PART = h * S;
   const SECOND_PART = t1 + t2;
   const RESULT = (FIRST_PART * SECOND_PART) / 2;
   return FixResult(RESULT);
 }
-// Get Deficit Cost
-export function GetDeficitCost(u: number, d: number, t3: number, t4: number) {
+// Get Total Deficit Cost
+export function GetTotalDeficitCost(u: number, d: number, t3: number, t4: number) {
   const FIRST_PART = u * d;
   const SECOND_PART = t3 + t4;
   const RESULT = (FIRST_PART * SECOND_PART) / 2;
@@ -109,6 +109,7 @@ export function GetTotalProductionCost(k: number, f: number) {
   const RESULT = k * f;
   return FixResult(RESULT);
 }
+// Get Total Unit Cost
 export function GetTotalUnitCost(a: number, c: number) {
   const RESULT = a * c;
   return FixResult(RESULT);
