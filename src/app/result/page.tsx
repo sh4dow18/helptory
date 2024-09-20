@@ -4,6 +4,7 @@ import "@/stylesheets/pages/result.css";
 import { Page } from "@/components";
 import { Metadata } from "next";
 import {
+  GetDeficitCost,
   GetFirstTimeIntervalt1,
   GetFourthTimeIntervalt4,
   GetFrequencyBetweenTwoProductionRunsf,
@@ -55,6 +56,7 @@ function ResultPage({ searchParams }: Props) {
   const T = GetTimeBetweenTwoProductionRunsT(t1, t2, t3, t4);
   const f = GetFrequencyBetweenTwoProductionRunsf(T);
   const CI = GetInventoryCost(h, S, t1, t2);
+  const CD = GetDeficitCost(u, d, t3, t4);
   // Returns Result Page
   return (
     // Result Page Container with Main Title
@@ -143,6 +145,10 @@ function ResultPage({ searchParams }: Props) {
           <li>
             {/* Time Interval T4 */}
             <strong>Costo por Mantener en Inventario (C(I)):</strong> ${CI}
+          </li>
+          <li>
+            {/* Total Deficit Cost */}
+            <strong>Costo por Déficit (C(D)):</strong> ${CD}
           </li>
         </ul>
       </section>

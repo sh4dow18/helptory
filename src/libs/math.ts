@@ -97,3 +97,10 @@ export function GetInventoryCost(h: number, S: number, t1: number, t2: number) {
   const RESULT = (FIRST_PART * SECOND_PART) / 2;
   return FixResult(RESULT);
 }
+// Get Deficit Cost
+export function GetDeficitCost(u: number, d: number, t3: number, t4: number) {
+  const FIRST_PART = u * d;
+  const SECOND_PART = t3 + t4;
+  const RESULT = (FIRST_PART * SECOND_PART) / 2;
+  return FixResult(RESULT);
+}
