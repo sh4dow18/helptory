@@ -22,13 +22,8 @@ export function GetOptimalProductionLotSizeQ(
   return FixResult(Math.sqrt(result));
 }
 // Get Time Between Two Production Runs function
-export function GetTimeBetweenTwoProductionRunsT(
-  t1: number,
-  t2: number,
-  t3: number,
-  t4: number
-) {
-  const RESULT = t1 + t2 + t3 + t4;
+export function GetTimeBetweenTwoProductionRunsT(Q: number, a: number) {
+  const RESULT = Q / a;
   return FixResult(RESULT);
 }
 // Get Frequency Between Two Production Runs

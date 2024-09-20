@@ -63,7 +63,7 @@ function ResultPage({ searchParams }: Props) {
   const t1 = GetFirstTimeIntervalt1(S, r, a);
   const t3 = GetThirdTimeIntervalt3(h, k, a, r, u);
   const t4 = GetFourthTimeIntervalt4(d, r, a);
-  const T = GetTimeBetweenTwoProductionRunsT(t1, t2, t3, t4);
+  const T = GetTimeBetweenTwoProductionRunsT(Q, a);
   const f = GetFrequencyBetweenTwoProductionRunsf(T);
   const CI = GetTotalInventoryMaintenanceCost(h, S, t1, t2);
   const CD = GetTotalDeficitCost(u, d, t3, t4);
