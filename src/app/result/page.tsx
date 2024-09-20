@@ -15,6 +15,7 @@ import {
   GetSecondTimeIntervalt2,
   GetThirdTimeIntervalt3,
   GetTimeBetweenTwoProductionRunsT,
+  GetTotalProductionCost,
 } from "@/libs/math";
 // Result Page  Constants
 const TITLE = "Resultados";
@@ -57,6 +58,7 @@ function ResultPage({ searchParams }: Props) {
   const f = GetFrequencyBetweenTwoProductionRunsf(T);
   const CI = GetInventoryCost(h, S, t1, t2);
   const CD = GetDeficitCost(u, d, t3, t4);
+  const CP = GetTotalProductionCost(k, f);
   // Returns Result Page
   return (
     // Result Page Container with Main Title
@@ -149,6 +151,10 @@ function ResultPage({ searchParams }: Props) {
           <li>
             {/* Total Deficit Cost */}
             <strong>Costo por Déficit (C(D)):</strong> ${CD}
+          </li>
+          <li>
+            {/* Total Production Cost */}
+            <strong>Costo por Producción Total (C(P)):</strong> ${CP}
           </li>
         </ul>
       </section>

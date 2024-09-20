@@ -104,3 +104,8 @@ export function GetDeficitCost(u: number, d: number, t3: number, t4: number) {
   const RESULT = (FIRST_PART * SECOND_PART) / 2;
   return FixResult(RESULT);
 }
+// Get Total Production Cost
+export function GetTotalProductionCost(k: number, f: number) {
+  const RESULT = k * f;
+  return FixResult(RESULT);
+}
