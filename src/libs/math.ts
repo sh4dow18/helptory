@@ -109,3 +109,7 @@ export function GetTotalProductionCost(k: number, f: number) {
   const RESULT = k * f;
   return FixResult(RESULT);
 }
+export function GetTotalUnitCost(a: number, c: number) {
+  const RESULT = a * c;
+  return FixResult(RESULT);
+}
