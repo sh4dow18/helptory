@@ -47,18 +47,23 @@ export function GetMaxDeficit(
 }
 // Get Second Time Interval
 export function GetSecondTimeIntervalt2(
+  model: string,
   u: number,
   k: number,
   a: number,
   r: number,
   h: number
 ) {
-  const FIRST_PART = 2 * u * k;
+  let firstPart = 2 * k;
   const SECOND_PART = 1 - a / r;
-  const THIRD_PART = a * h;
-  const FOURTH_PART = h + u;
-  const RESULT = (FIRST_PART * SECOND_PART) / (THIRD_PART * FOURTH_PART);
-  return Number.parseFloat(Math.sqrt(RESULT).toFixed(4));
+  let thirdPart = a * h;
+  // If the model is EPQ with Deficit, add deficit to formula
+  if (model === "epq-w-d") {
+    firstPart = firstPart * u;
+    thirdPart = thirdPart * (h + u);
+  }
+  const RESULT = (firstPart * SECOND_PART) / thirdPart;
+  return FixResult(Math.sqrt(RESULT));
 }
 // Get Max Inventory Level
 export function GetMaxInventoryLevelS(a: number, t2: number) {

@@ -58,7 +58,7 @@ function ResultPage({ searchParams }: Props) {
   // Get Results
   const Q = GetOptimalProductionLotSizeQ(model, a, k, h, r, u);
   const d = GetMaxDeficit(a, h, k, r, u);
-  const t2 = GetSecondTimeIntervalt2(u, k, a, r, h);
+  const t2 = GetSecondTimeIntervalt2(model, u, k, a, r, h);
   const S = GetMaxInventoryLevelS(a, t2);
   const t1 = GetFirstTimeIntervalt1(S, r, a);
   const t3 = GetThirdTimeIntervalt3(h, k, a, r, u);
