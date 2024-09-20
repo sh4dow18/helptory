@@ -90,3 +90,10 @@ export function GetFourthTimeIntervalt4(d: number, r: number, a: number) {
   const RESULT = d / (r - a);
   return Number.parseFloat(RESULT.toFixed(4));
 }
+// Get Inventary Costs
+export function GetInventoryCost(h: number, S: number, t1: number, t2: number) {
+  const FIRST_PART = h * S;
+  const SECOND_PART = t1 + t2;
+  const RESULT = (FIRST_PART * SECOND_PART) / 2;
+  return FixResult(RESULT);
+}

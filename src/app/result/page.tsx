@@ -7,6 +7,7 @@ import {
   GetFirstTimeIntervalt1,
   GetFourthTimeIntervalt4,
   GetFrequencyBetweenTwoProductionRunsf,
+  GetInventoryCost,
   GetMaxDeficit,
   GetMaxInventoryLevelS,
   GetOptimalProductionLotSizeQ,
@@ -53,6 +54,7 @@ function ResultPage({ searchParams }: Props) {
   const t4 = GetFourthTimeIntervalt4(d, r, a);
   const T = GetTimeBetweenTwoProductionRunsT(t1, t2, t3, t4);
   const f = GetFrequencyBetweenTwoProductionRunsf(T);
+  const CI = GetInventoryCost(h, S, t1, t2);
   // Returns Result Page
   return (
     // Result Page Container with Main Title
@@ -137,6 +139,10 @@ function ResultPage({ searchParams }: Props) {
           <li>
             {/* Time Interval T4 */}
             <strong>Intervalo de Tiempo (T4):</strong> {t4} días
+          </li>
+          <li>
+            {/* Time Interval T4 */}
+            <strong>Costo por Mantener en Inventario (C(I)):</strong> ${CI}
           </li>
         </ul>
       </section>
