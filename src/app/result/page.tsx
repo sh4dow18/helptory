@@ -61,6 +61,7 @@ function ResultPage({ searchParams }: Props) {
   const CD = GetDeficitCost(u, d, t3, t4);
   const CP = GetTotalProductionCost(k, f);
   const CU = GetTotalUnitCost(a, c);
+  const CT = CI + CD + CP + CU;
   // Returns Result Page
   return (
     // Result Page Container with Main Title
@@ -161,6 +162,10 @@ function ResultPage({ searchParams }: Props) {
           <li>
             {/* Total Production Cost */}
             <strong>Costo Total por Unidad (C(U)):</strong> ${CU}
+          </li>
+          <li>
+            {/* Total Cost */}
+            <strong>Costo Total (C(T)):</strong> ${CT}
           </li>
         </ul>
       </section>
