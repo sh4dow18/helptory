@@ -34,7 +34,16 @@ export default function Home() {
             <Select
               label="Modelo"
               name="model"
-              optionsList={["EPQ con Déficit"]}
+              optionsList={[
+                {
+                  name: "EPQ con Déficit (Con Faltantes)",
+                  value: "epq-w-d",
+                },
+                {
+                  name: "EPQ sin Déficit (Sin Faltantes)",
+                  value: "epq-wo-d",
+                },
+              ]}
               help="Elige el Modelo a Usar"
             />
             {/* Constant Production Ratio */}
@@ -77,23 +86,23 @@ export default function Home() {
               help="Números Positivos Solamente"
               validation="number"
             />
-            {/* Cost of Deficit in Dollars */}
-            <Input
-              label="Costo por Déficit en Dólares (u)"
-              type="text"
-              name="u"
-              example="2"
-              help="Números Positivos Solamente"
-              validation="number"
-            />
-          </div>
-          <div>
             {/* Launch Cost in Dollars */}
             <Input
               label="Costo de Lanzamiento en Dólares (k)"
               type="text"
               name="k"
               example="100"
+              help="Números Positivos Solamente"
+              validation="number"
+            />
+          </div>
+          <div>
+            {/* Cost of Deficit in Dollars */}
+            <Input
+              label="Costo por Déficit en Dólares (u)"
+              type="text"
+              name="u"
+              example="2"
               help="Números Positivos Solamente"
               validation="number"
             />

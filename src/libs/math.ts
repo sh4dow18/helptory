@@ -4,6 +4,7 @@ function FixResult(result: number) {
 }
 // Get Optimal Production Lot Size Function
 export function GetOptimalProductionLotSizeQ(
+  model: string,
   a: number,
   k: number,
   h: number,
@@ -12,18 +13,17 @@ export function GetOptimalProductionLotSizeQ(
 ) {
   const FIRST_PART = (2 * a * k) / h;
   const SECOND_PART = 1 / (1 - a / r);
-  const THIRD_PART = (h + u) / u;
-  const RESULT = FIRST_PART * SECOND_PART * THIRD_PART;
-  return FixResult(Math.sqrt(RESULT));
+  let result = FIRST_PART * SECOND_PART;
+  // If it is the EPQ With Deficit Model, add deficit cost to the result formula
+  if (model === "epq-w-d") {
+    const THIRD_PART = (h + u) / u;
+    result = result * THIRD_PART;
+  }
+  return FixResult(Math.sqrt(result));
 }
 // Get Time Between Two Production Runs function
-export function GetTimeBetweenTwoProductionRunsT(
-  t1: number,
-  t2: number,
-  t3: number,
-  t4: number
-) {
-  const RESULT = t1 + t2 + t3 + t4;
+export function GetTimeBetweenTwoProductionRunsT(Q: number, a: number) {
+  const RESULT = Q / a;
   return FixResult(RESULT);
 }
 // Get Frequency Between Two Production Runs
@@ -47,18 +47,23 @@ export function GetMaxDeficit(
 }
 // Get Second Time Interval
 export function GetSecondTimeIntervalt2(
+  model: string,
   u: number,
   k: number,
   a: number,
   r: number,
   h: number
 ) {
-  const FIRST_PART = 2 * u * k;
+  let firstPart = 2 * k;
   const SECOND_PART = 1 - a / r;
-  const THIRD_PART = a * h;
-  const FOURTH_PART = h + u;
-  const RESULT = (FIRST_PART * SECOND_PART) / (THIRD_PART * FOURTH_PART);
-  return Number.parseFloat(Math.sqrt(RESULT).toFixed(4));
+  let thirdPart = a * h;
+  // If the model is EPQ with Deficit, add deficit to formula
+  if (model === "epq-w-d") {
+    firstPart = firstPart * u;
+    thirdPart = thirdPart * (h + u);
+  }
+  const RESULT = (firstPart * SECOND_PART) / thirdPart;
+  return FixResult(Math.sqrt(RESULT));
 }
 // Get Max Inventory Level
 export function GetMaxInventoryLevelS(a: number, t2: number) {
@@ -91,14 +96,24 @@ export function GetFourthTimeIntervalt4(d: number, r: number, a: number) {
   return Number.parseFloat(RESULT.toFixed(4));
 }
 // Get Total Inventary Maintenance Costs
-export function GetTotalInventoryMaintenanceCost(h: number, S: number, t1: number, t2: number) {
+export function GetTotalInventoryMaintenanceCost(
+  h: number,
+  S: number,
+  t1: number,
+  t2: number
+) {
   const FIRST_PART = h * S;
   const SECOND_PART = t1 + t2;
   const RESULT = (FIRST_PART * SECOND_PART) / 2;
   return FixResult(RESULT);
 }
 // Get Total Deficit Cost
-export function GetTotalDeficitCost(u: number, d: number, t3: number, t4: number) {
+export function GetTotalDeficitCost(
+  u: number,
+  d: number,
+  t3: number,
+  t4: number
+) {
   const FIRST_PART = u * d;
   const SECOND_PART = t3 + t4;
   const RESULT = (FIRST_PART * SECOND_PART) / 2;
