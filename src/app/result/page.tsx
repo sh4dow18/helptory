@@ -53,20 +53,20 @@ function ResultPage({ searchParams }: Props) {
   const a = GetNumberFromParam("a");
   const c = GetNumberFromParam("c");
   const h = GetNumberFromParam("h");
-  const u = GetNumberFromParam("u");
   const k = GetNumberFromParam("k");
+  const u = model.endsWith("w-d") ? GetNumberFromParam("u") : 0;
   // Get Results
   const Q = GetOptimalProductionLotSizeQ(model, a, k, h, r, u);
   const d = GetMaxDeficit(a, h, k, r, u);
   const t2 = GetSecondTimeIntervalt2(model, u, k, a, r, h);
   const S = GetMaxInventoryLevelS(a, t2);
   const t1 = GetFirstTimeIntervalt1(S, r, a);
-  const t3 = GetThirdTimeIntervalt3(h, k, a, r, u);
-  const t4 = GetFourthTimeIntervalt4(d, r, a);
+  const t3 = u !== 0 ? GetThirdTimeIntervalt3(h, k, a, r, u) : 0;
+  const t4 = u !== 0 ? GetFourthTimeIntervalt4(d, r, a) : 0;
   const T = GetTimeBetweenTwoProductionRunsT(Q, a);
   const f = GetFrequencyBetweenTwoProductionRunsf(T);
   const CI = GetTotalInventoryMaintenanceCost(h, S, t1, t2);
-  const CD = GetTotalDeficitCost(u, d, t3, t4);
+  const CD = u !== 0 ? GetTotalDeficitCost(u, d, t3, t4) : 0;
   const CP = GetTotalProductionCost(k, f);
   const CU = GetTotalUnitCost(a, c);
   const CT = CI + CD + CP + CU;
@@ -100,13 +100,15 @@ function ResultPage({ searchParams }: Props) {
             <strong>Costo por Mantener en Inventario (h):</strong> ${h}
           </li>
           <li>
-            {/* Deficit Cost */}
-            <strong>Costo por Déficit (u):</strong> ${u}
-          </li>
-          <li>
             {/* Release Cost */}
             <strong>Costo por Lanzamiento (k):</strong> ${k}
           </li>
+          {u !== 0 && (
+            <li>
+              {/* Deficit Cost */}
+              <strong>Costo por Déficit (u):</strong> ${u}
+            </li>
+          )}
         </ul>
       </section>
       <section>
@@ -130,10 +132,12 @@ function ResultPage({ searchParams }: Props) {
             </strong>{" "}
             {f}
           </li>
-          <li>
-            {/* Maximum deficit */}
-            <strong>Déficit máximo (d):</strong> {d} unidades físicas
-          </li>
+          {u !== 0 && (
+            <li>
+              {/* Maximum deficit */}
+              <strong>Déficit máximo (d):</strong> {d} unidades físicas
+            </li>
+          )}
           <li>
             {/* Maximum Inventory Level */}
             <strong>Nivel de Inventario Máximo (S):</strong> {S} unidades
@@ -147,22 +151,28 @@ function ResultPage({ searchParams }: Props) {
             {/* Time Interval T2 */}
             <strong>Intervalo de Tiempo (T2):</strong> {t2} días
           </li>
-          <li>
-            {/* Time Interval T3 */}
-            <strong>Intervalo de Tiempo (T3):</strong> {t3} días
-          </li>
-          <li>
-            {/* Time Interval T4 */}
-            <strong>Intervalo de Tiempo (T4):</strong> {t4} días
-          </li>
+          {u !== 0 && (
+            <>
+              <li>
+                {/* Time Interval T3 */}
+                <strong>Intervalo de Tiempo (T3):</strong> {t3} días
+              </li>
+              <li>
+                {/* Time Interval T4 */}
+                <strong>Intervalo de Tiempo (T4):</strong> {t4} días
+              </li>
+            </>
+          )}
           <li>
             {/* Total Inventory Maintenance Cost */}
             <strong>Costo por Mantener en Inventario (C(I)):</strong> ${CI}
           </li>
-          <li>
-            {/* Total Deficit Cost */}
-            <strong>Costo por Déficit (C(D)):</strong> ${CD}
-          </li>
+          {u !== 0 && (
+            <li>
+              {/* Total Deficit Cost */}
+              <strong>Costo por Déficit (C(D)):</strong> ${CD}
+            </li>
+          )}
           <li>
             {/* Total Production Cost */}
             <strong>Costo por Producción Total (C(P)):</strong> ${CP}
