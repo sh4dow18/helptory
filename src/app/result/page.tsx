@@ -41,7 +41,7 @@ function ResultPage({ searchParams }: Props) {
   // Transform String Param to Number
   const GetNumberFromParam = (param: string): number => {
     return typeof searchParams[param] === "string"
-      ? Number.parseInt(searchParams[param])
+      ? Number.parseFloat(searchParams[param])
       : 0;
   };
   // Get every param
