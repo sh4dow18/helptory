@@ -13,6 +13,10 @@ import {
   GetSecondTimeIntervalt2,
   GetThirdTimeIntervalt3,
   GetTimeBetweenTwoProductionRunsT,
+  GetTotalDeficitCost,
+  GetTotalInventoryMaintenanceCost,
+  GetTotalProductionCost,
+  GetTotalUnitCost,
 } from "@/libs/math";
 // Result Page  Constants
 const TITLE = "Resultados";
@@ -53,6 +57,11 @@ function ResultPage({ searchParams }: Props) {
   const t4 = GetFourthTimeIntervalt4(d, r, a);
   const T = GetTimeBetweenTwoProductionRunsT(t1, t2, t3, t4);
   const f = GetFrequencyBetweenTwoProductionRunsf(T);
+  const CI = GetTotalInventoryMaintenanceCost(h, S, t1, t2);
+  const CD = GetTotalDeficitCost(u, d, t3, t4);
+  const CP = GetTotalProductionCost(k, f);
+  const CU = GetTotalUnitCost(a, c);
+  const CT = CI + CD + CP + CU;
   // Returns Result Page
   return (
     // Result Page Container with Main Title
@@ -137,6 +146,26 @@ function ResultPage({ searchParams }: Props) {
           <li>
             {/* Time Interval T4 */}
             <strong>Intervalo de Tiempo (T4):</strong> {t4} días
+          </li>
+          <li>
+            {/* Total Inventory Maintenance Cost */}
+            <strong>Costo por Mantener en Inventario (C(I)):</strong> ${CI}
+          </li>
+          <li>
+            {/* Total Deficit Cost */}
+            <strong>Costo por Déficit (C(D)):</strong> ${CD}
+          </li>
+          <li>
+            {/* Total Production Cost */}
+            <strong>Costo por Producción Total (C(P)):</strong> ${CP}
+          </li>
+          <li>
+            {/* Total Unit Cost */}
+            <strong>Costo Total por Unidad (C(U)):</strong> ${CU}
+          </li>
+          <li>
+            {/* Total Cost */}
+            <strong>Costo Total (C(T)):</strong> ${CT}
           </li>
         </ul>
       </section>
