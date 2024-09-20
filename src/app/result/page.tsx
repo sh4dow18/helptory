@@ -45,6 +45,10 @@ function ResultPage({ searchParams }: Props) {
       : 0;
   };
   // Get every param
+  const model =
+    typeof searchParams["model"] === "string"
+      ? searchParams["model"]
+      : modelsRecord["epq-w-d"];
   const r = GetNumberFromParam("r");
   const a = GetNumberFromParam("a");
   const c = GetNumberFromParam("c");
@@ -52,7 +56,7 @@ function ResultPage({ searchParams }: Props) {
   const u = GetNumberFromParam("u");
   const k = GetNumberFromParam("k");
   // Get Results
-  const Q = GetOptimalProductionLotSizeQ(a, k, h, r, u);
+  const Q = GetOptimalProductionLotSizeQ(model, a, k, h, r, u);
   const d = GetMaxDeficit(a, h, k, r, u);
   const t2 = GetSecondTimeIntervalt2(u, k, a, r, h);
   const S = GetMaxInventoryLevelS(a, t2);
@@ -76,10 +80,7 @@ function ResultPage({ searchParams }: Props) {
         <ul>
           <li>
             {/* Selected Model */}
-            <strong>Modelo Seleccionado:</strong>{" "}
-            {typeof searchParams["model"] === "string"
-              ? modelsRecord[searchParams["model"]]
-              : "Error"}
+            <strong>Modelo Seleccionado:</strong> {modelsRecord[model]}
           </li>
           <li>
             {/* Constant Production Ratio */}
