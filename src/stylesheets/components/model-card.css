@@ -1,0 +1,80 @@
+/* Main Classes Styles */
+/* Sorted Alphabetically */
+
+/* First Grade */
+
+.model-card-container {
+  /* Display */
+  border-radius: 1rem;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  /* Spacers */
+  margin: 1rem;
+  /* Texts */
+  text-decoration: none;
+  /* Colors */
+  color: var(--black);
+  border: 1px solid var(--black);
+}
+.model-card-container:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/* Second Grade */
+
+.model-card-container img {
+  /* Display */
+  border-top-left-radius: 0.9rem;
+  border-top-right-radius: 0.9rem;
+}
+
+.model-card-container p {
+  /* Display */
+  border-bottom-left-radius: 0.9rem;
+  border-bottom-right-radius: 0.9rem;
+  /* Spacers */
+  padding: 0.5rem;
+  /* Texts */
+  text-align: center;
+  font-weight: bold;
+  font-variant: small-caps;
+  /* Colors */
+  border-top: 1px solid var(--black);
+  color: var(--white);
+  background: linear-gradient(var(--primary), var(--black));
+}
+
+/* Media Queries */
+/* Sorted by Max Width */
+
+@media screen and (max-width: 625px) {
+  /* Main Classes Styles */
+  /* Sorted Alphabetically */
+
+  /* First Grade */
+
+  .model-card-container {
+    /* Spacers */
+    margin-inline: 1%;
+  }
+}
+@media screen and (max-width: 582px) {
+  /* Main Classes Styles */
+  /* Sorted Alphabetically */
+
+  /* First Grade */
+
+  .model-card-container,
+  .model-card-container img {
+    /* Display */
+    width: 100%;
+  }
+
+  /* Second Grade */
+
+  .model-card-container img {
+    /* Display */
+    height: 200px;
+  }
+}

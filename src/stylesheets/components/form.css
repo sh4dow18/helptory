@@ -13,9 +13,10 @@
 /* Second Grade */
 
 .form-container div {
+  /* Display */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  column-gap: 1rem;
 }
 .form-container section {
   /* Display */

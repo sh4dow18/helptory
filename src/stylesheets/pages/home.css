@@ -1,0 +1,11 @@
+/* Main Classes Styles */
+/* Sorted Alphabetically */
+
+/* Second Grade */
+
+.models-cards-list-container div {
+  /* Display */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
