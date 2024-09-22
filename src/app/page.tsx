@@ -28,7 +28,7 @@ export default function Home() {
           {/* EOQ with Deficit Model Card */}
           <ModelCard code="eoq-w-d" name="EOQ con Déficit (Con Faltantes)" />
           {/* EOQ without Deficit Model Card */}
-          <ModelCard code="eoq-wo-d" name="EPQ sin Déficit (Sin Faltantes)" />
+          <ModelCard code="eoq-wo-d" name="EOQ sin Déficit (Sin Faltantes)" />
         </div>
       </section>
     </Page>
