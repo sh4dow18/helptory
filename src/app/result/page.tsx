@@ -159,7 +159,7 @@ function ResultPage({ searchParams }: Props) {
             {/* Time Interval T2 */}
             <strong>Intervalo de Tiempo (T2):</strong> {t2} unidades de tiempo
           </li>
-          {u !== 0 && (
+          {u !== 0 && model.startsWith("epq") && (
             <>
               <li>
                 {/* Time Interval T3 */}
