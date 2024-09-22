@@ -65,11 +65,13 @@ function ResultPage({ searchParams }: Props) {
   const d = GetMaxDeficit(model, a, h, k, r, u);
   const t2 = GetSecondTimeIntervalt2(model, u, k, a, r, h);
   const S = GetMaxInventoryLevelS(model, a, t2, Q);
-  const t1 = GetFirstTimeIntervalt1(model, S, r, a, u, k, h);
+  const T = GetTimeBetweenTwoProductionRunsT(Q, a);
+  // If it is not the EOQ without model, calcule with the function, if it is, set t1 to T
+  const t1 =
+    model !== "eoq-wo-d" ? GetFirstTimeIntervalt1(model, S, r, a, u, k, h) : T;
   // If u is not 0, get T3 and T4, if not, set t3 and t4 to 0
   const t3 = u !== 0 ? GetThirdTimeIntervalt3(h, k, a, r, u) : 0;
   const t4 = u !== 0 ? GetFourthTimeIntervalt4(d, r, a) : 0;
-  const T = GetTimeBetweenTwoProductionRunsT(Q, a);
   const f = GetFrequencyBetweenTwoProductionRunsf(T);
   const CI = GetTotalInventoryMaintenanceCost(model, h, S, t1, t2);
   // If u is not 0, get the total deficit cost, if not, set CD to 0
@@ -156,10 +158,12 @@ function ResultPage({ searchParams }: Props) {
             {/* Time Interval T1 */}
             <strong>Intervalo de Tiempo (T1):</strong> {t1} unidades de tiempo
           </li>
-          <li>
-            {/* Time Interval T2 */}
-            <strong>Intervalo de Tiempo (T2):</strong> {t2} unidades de tiempo
-          </li>
+          {model !== "eoq-wo-d" && (
+            <li>
+              {/* Time Interval T2 */}
+              <strong>Intervalo de Tiempo (T2):</strong> {t2} unidades de tiempo
+            </li>
+          )}
           {u !== 0 && model.startsWith("epq") && (
             <>
               <li>
