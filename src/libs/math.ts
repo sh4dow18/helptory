@@ -134,14 +134,18 @@ export function GetFourthTimeIntervalt4(d: number, r: number, a: number) {
 }
 // Get Total Inventary Maintenance Costs
 export function GetTotalInventoryMaintenanceCost(
+  model: string,
   h: number,
   S: number,
   t1: number,
   t2: number
 ) {
   const FIRST_PART = h * S;
-  const SECOND_PART = t1 + t2;
-  const RESULT = (FIRST_PART * SECOND_PART) / 2;
+  let secondPart = t1;
+  if (model.startsWith("epq")) {
+    secondPart = secondPart + t2;
+  }
+  const RESULT = (FIRST_PART * secondPart) / 2;
   return FixResult(RESULT);
 }
 // Get Total Deficit Cost
