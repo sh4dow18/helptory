@@ -72,7 +72,7 @@ function ResultPage({ searchParams }: Props) {
   const f = GetFrequencyBetweenTwoProductionRunsf(T);
   const CI = GetTotalInventoryMaintenanceCost(model, h, S, t1, t2);
   // If u is not 0, get the total deficit cost, if not, set CD to 0
-  const CD = u !== 0 ? GetTotalDeficitCost(u, d, t3, t4) : 0;
+  const CD = u !== 0 ? GetTotalDeficitCost(model, u, d, t2, t3, t4) : 0;
   const CP = GetTotalProductionCost(k, f);
   const CU = GetTotalUnitCost(a, c);
   const CT = CI + CD + CP + CU;

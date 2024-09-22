@@ -150,14 +150,19 @@ export function GetTotalInventoryMaintenanceCost(
 }
 // Get Total Deficit Cost
 export function GetTotalDeficitCost(
+  model: string,
   u: number,
   d: number,
+  t2: number,
   t3: number,
   t4: number
 ) {
   const FIRST_PART = u * d;
-  const SECOND_PART = t3 + t4;
-  const RESULT = (FIRST_PART * SECOND_PART) / 2;
+  let secondPart = t3 + t4;
+  if (model === "eoq-w-d") {
+    secondPart = t2;
+  }
+  const RESULT = (FIRST_PART * secondPart) / 2;
   return FixResult(RESULT);
 }
 // Get Total Production Cost
