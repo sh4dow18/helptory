@@ -94,9 +94,23 @@ export function GetMaxInventoryLevelS(
   return Number.parseFloat(result.toFixed(4));
 }
 // Get First Time Interval
-export function GetFirstTimeIntervalt1(S: number, r: number, a: number) {
-  const RESULT = S / (r - a);
-  return Number.parseFloat(RESULT.toFixed(4));
+export function GetFirstTimeIntervalt1(
+  model: string,
+  S: number,
+  r: number,
+  a: number,
+  u: number,
+  k: number,
+  h: number
+) {
+  let result = S / (r - a);
+  // If it is the EOQ with Deficit Model, use the model of EOQ with Deficit Model
+  if (model === "eoq-w-d") {
+    const FIRST_PART = 2 * u * k;
+    const SECOND_PART = a * h * (h + u);
+    result = Math.sqrt(FIRST_PART / SECOND_PART);
+  }
+  return Number.parseFloat(result.toFixed(4));
 }
 // Get Third Time Interval
 export function GetThirdTimeIntervalt3(
