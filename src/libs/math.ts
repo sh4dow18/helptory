@@ -88,8 +88,9 @@ export function GetMaxInventoryLevelS(
 ) {
   let result = a * t2;
   // If it is the EOQ with Deficit Model, change the formula to Q - a * t2
-  if (model === "eoq-w-d") {
-    result = Q - result;
+  // If it is the EOQ without Deficit Model, set result to Q
+  if (model.startsWith("eoq")) {
+    result = model.endsWith("w-d") ? Q - result : Q;
   }
   return Number.parseFloat(result.toFixed(4));
 }
