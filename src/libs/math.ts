@@ -37,6 +37,7 @@ export function GetFrequencyBetweenTwoProductionRunsf(T: number) {
 }
 // Get Maximum Deficit
 export function GetMaxDeficit(
+  model: string,
   a: number,
   h: number,
   k: number,
@@ -44,9 +45,12 @@ export function GetMaxDeficit(
   u: number
 ) {
   const FIRST_PART = 2 * a * h * k;
-  const SECOND_PART = 1 - a / r;
+  let secondPart = 1 - a / r;
   const THIRD_PART = u * (h + u);
-  const RESULT = (FIRST_PART * SECOND_PART) / THIRD_PART;
+  if (model === "eoq-w-d") {
+    secondPart = 1;
+  }
+  const RESULT = (FIRST_PART * secondPart) / THIRD_PART;
   return FixResult(Math.sqrt(RESULT));
 }
 // Get Second Time Interval
