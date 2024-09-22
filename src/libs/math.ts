@@ -12,10 +12,14 @@ export function GetOptimalProductionLotSizeQ(
   u: number
 ) {
   const FIRST_PART = (2 * a * k) / h;
-  const SECOND_PART = 1 / (1 - a / r);
-  let result = FIRST_PART * SECOND_PART;
-  // If it is the EPQ With Deficit Model, add deficit cost to the result formula
-  if (model === "epq-w-d") {
+  let result = FIRST_PART;
+  // If it is the EPQ Model, add Constant Production Ratio to the result formula
+  if (model.startsWith("epq")) {
+    const SECOND_PART = 1 / (1 - a / r);
+    result = result * SECOND_PART;
+  }
+  // If it is a Deficit Model, add deficit cost to the result formula
+  if (model.endsWith("w-d")) {
     const THIRD_PART = (h + u) / u;
     result = result * THIRD_PART;
   }
