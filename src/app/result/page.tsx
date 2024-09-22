@@ -36,6 +36,7 @@ export const dynamic = "force-dynamic";
 const modelsRecord: Record<string, string> = {
   "epq-w-d": "EPQ con Déficit (Con Faltantes)",
   "epq-wo-d": "EPQ sin Déficit (Sin Faltantes)",
+  "eoq-w-d": "EOQ con Déficit (Con Faltantes)",
 };
 // Result Page Main Function
 function ResultPage({ searchParams }: Props) {
@@ -87,11 +88,13 @@ function ResultPage({ searchParams }: Props) {
             {/* Selected Model */}
             <strong>Modelo Seleccionado:</strong> {modelsRecord[model]}
           </li>
-          <li>
-            {/* Constant Production Ratio */}
-            <strong>Razón de Producción Constante (r):</strong> {r} unidades
-            físicas
-          </li>
+          {r !== 0 && (
+            <li>
+              {/* Constant Production Ratio */}
+              <strong>Razón de Producción Constante (r):</strong> {r} unidades
+              físicas
+            </li>
+          )}
           <li>
             {/* Constant Demand */}
             <strong>Demanda Constante (a):</strong> {a} unidades físicas
@@ -172,7 +175,8 @@ function ResultPage({ searchParams }: Props) {
           )}
           <li>
             {/* Total Inventory Maintenance Cost */}
-            <strong>Costo Total por Mantener en Inventario (C(I)):</strong> ${CI}
+            <strong>Costo Total por Mantener en Inventario (C(I)):</strong> $
+            {CI}
           </li>
           {u !== 0 && (
             <li>
