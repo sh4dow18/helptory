@@ -36,6 +36,7 @@ export const dynamic = "force-dynamic";
 const modelsRecord: Record<string, string> = {
   "epq-w-d": "EPQ con Déficit (Con Faltantes)",
   "epq-wo-d": "EPQ sin Déficit (Sin Faltantes)",
+  "eoq-w-d": "EOQ con Déficit (Con Faltantes)",
 };
 // Result Page Main Function
 function ResultPage({ searchParams }: Props) {
@@ -60,18 +61,18 @@ function ResultPage({ searchParams }: Props) {
   const u = model.endsWith("w-d") ? GetNumberFromParam("u") : 0;
   // Get Results
   const Q = GetOptimalProductionLotSizeQ(model, a, k, h, r, u);
-  const d = GetMaxDeficit(a, h, k, r, u);
+  const d = GetMaxDeficit(model, a, h, k, r, u);
   const t2 = GetSecondTimeIntervalt2(model, u, k, a, r, h);
-  const S = GetMaxInventoryLevelS(a, t2);
-  const t1 = GetFirstTimeIntervalt1(S, r, a);
+  const S = GetMaxInventoryLevelS(model, a, t2, Q);
+  const t1 = GetFirstTimeIntervalt1(model, S, r, a, u, k, h);
   // If u is not 0, get T3 and T4, if not, set t3 and t4 to 0
   const t3 = u !== 0 ? GetThirdTimeIntervalt3(h, k, a, r, u) : 0;
   const t4 = u !== 0 ? GetFourthTimeIntervalt4(d, r, a) : 0;
   const T = GetTimeBetweenTwoProductionRunsT(Q, a);
   const f = GetFrequencyBetweenTwoProductionRunsf(T);
-  const CI = GetTotalInventoryMaintenanceCost(h, S, t1, t2);
+  const CI = GetTotalInventoryMaintenanceCost(model, h, S, t1, t2);
   // If u is not 0, get the total deficit cost, if not, set CD to 0
-  const CD = u !== 0 ? GetTotalDeficitCost(u, d, t3, t4) : 0;
+  const CD = u !== 0 ? GetTotalDeficitCost(model, u, d, t2, t3, t4) : 0;
   const CP = GetTotalProductionCost(k, f);
   const CU = GetTotalUnitCost(a, c);
   const CT = CI + CD + CP + CU;
@@ -87,11 +88,13 @@ function ResultPage({ searchParams }: Props) {
             {/* Selected Model */}
             <strong>Modelo Seleccionado:</strong> {modelsRecord[model]}
           </li>
-          <li>
-            {/* Constant Production Ratio */}
-            <strong>Razón de Producción Constante (r):</strong> {r} unidades
-            físicas
-          </li>
+          {r !== 0 && (
+            <li>
+              {/* Constant Production Ratio */}
+              <strong>Razón de Producción Constante (r):</strong> {r} unidades
+              físicas
+            </li>
+          )}
           <li>
             {/* Constant Demand */}
             <strong>Demanda Constante (a):</strong> {a} unidades físicas
@@ -156,7 +159,7 @@ function ResultPage({ searchParams }: Props) {
             {/* Time Interval T2 */}
             <strong>Intervalo de Tiempo (T2):</strong> {t2} unidades de tiempo
           </li>
-          {u !== 0 && (
+          {u !== 0 && model.startsWith("epq") && (
             <>
               <li>
                 {/* Time Interval T3 */}
@@ -172,7 +175,8 @@ function ResultPage({ searchParams }: Props) {
           )}
           <li>
             {/* Total Inventory Maintenance Cost */}
-            <strong>Costo Total por Mantener en Inventario (C(I)):</strong> ${CI}
+            <strong>Costo Total por Mantener en Inventario (C(I)):</strong> $
+            {CI}
           </li>
           {u !== 0 && (
             <li>
