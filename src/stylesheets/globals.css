@@ -122,6 +122,10 @@ footer div p a {
 
 /* First Grade */
 
+.invisible {
+  /* Display */
+  display: none;
+}
 .model-cards-list {
   /* Display */
   display: flex;

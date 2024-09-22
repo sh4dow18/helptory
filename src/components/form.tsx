@@ -72,21 +72,23 @@ function Form({ api, method, button, modal, children }: Props) {
     const UpdateButton = () => {
       // If the Reference Exists, continue
       if (REFERENCE.current) {
-        // First, get every Input and Textarea in the Form
+        // First, get every Input, Textarea and Select in the Form
         // Later, create a new key-value array with input name and aria-invalid attribute
+        // Finally, remove any element with the key name "model"
         // Example: [ ["name", true], ["email", false] ]
         const inputsList = Array.from(
           REFERENCE.current.querySelectorAll<
             HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
           >("input, textarea, select")
-        ).map((input) => [
-          input.name,
-          input.getAttribute("aria-invalid") === "false",
-        ]);
+        )
+          .map((input) => [
+            input.name,
+            input.getAttribute("aria-invalid") === "false",
+          ])
+          .filter((input) => input[0] !== "model");
         // Create a new object from a key-value array
         // Example: From [ ["name", true], ["email", false] ] to { name: true, email: false }
         const FORM_OBJECT = Object.fromEntries(inputsList);
-        console.log(FORM_OBJECT)
         // Get values from FORM_OBJECT to check if every value is true
         // If it is true, set false, if not, set true
         SetDisabled(!Object.values(FORM_OBJECT).every(Boolean));
