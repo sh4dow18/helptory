@@ -37,6 +37,7 @@ const modelsRecord: Record<string, string> = {
   "epq-w-d": "EPQ con Déficit (Con Faltantes)",
   "epq-wo-d": "EPQ sin Déficit (Sin Faltantes)",
   "eoq-w-d": "EOQ con Déficit (Con Faltantes)",
+  "eoq-wo-d": "EOQ sin Déficit (Sin Faltantes)",
 };
 // Result Page Main Function
 function ResultPage({ searchParams }: Props) {
