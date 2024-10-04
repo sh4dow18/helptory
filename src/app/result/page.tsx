@@ -58,26 +58,27 @@ function ResultPage({ searchParams }: Props) {
   const c = GetNumberFromParam("c");
   const h = GetNumberFromParam("h");
   const k = GetNumberFromParam("k");
+  const decimals = GetNumberFromParam("decimals")
   // If the model is a deficit model, get the number of the string parameter, otherwise set u to 0
   const u = model.endsWith("w-d") ? GetNumberFromParam("u") : 0;
   // Get Results
-  const Q = GetOptimalProductionLotSizeQ(model, a, k, h, r, u);
-  const d = GetMaxDeficit(model, a, h, k, r, u);
-  const t2 = GetSecondTimeIntervalt2(model, u, k, a, r, h);
-  const S = GetMaxInventoryLevelS(model, a, t2, Q);
-  const T = GetTimeBetweenTwoProductionRunsT(Q, a);
+  const Q = GetOptimalProductionLotSizeQ(model, a, k, h, r, u, decimals);
+  const d = GetMaxDeficit(model, a, h, k, r, u, decimals);
+  const t2 = GetSecondTimeIntervalt2(model, u, k, a, r, h, decimals);
+  const S = GetMaxInventoryLevelS(model, a, t2, Q, decimals);
+  const T = GetTimeBetweenTwoProductionRunsT(Q, a, decimals);
   // If it is not the EOQ without model, calcule with the function, if it is, set t1 to T
   const t1 =
-    model !== "eoq-wo-d" ? GetFirstTimeIntervalt1(model, S, r, a, u, k, h) : T;
+    model !== "eoq-wo-d" ? GetFirstTimeIntervalt1(model, S, r, a, u, k, h, decimals) : T;
   // If u is not 0, get T3 and T4, if not, set t3 and t4 to 0
-  const t3 = u !== 0 ? GetThirdTimeIntervalt3(h, k, a, r, u) : 0;
-  const t4 = u !== 0 ? GetFourthTimeIntervalt4(d, r, a) : 0;
-  const f = GetFrequencyBetweenTwoProductionRunsf(T);
-  const CI = GetTotalInventoryMaintenanceCost(model, h, S, t1, t2);
+  const t3 = u !== 0 ? GetThirdTimeIntervalt3(h, k, a, r, u, decimals) : 0;
+  const t4 = u !== 0 ? GetFourthTimeIntervalt4(d, r, a, decimals) : 0;
+  const f = GetFrequencyBetweenTwoProductionRunsf(T, decimals);
+  const CI = GetTotalInventoryMaintenanceCost(model, h, S, t1, t2, decimals);
   // If u is not 0, get the total deficit cost, if not, set CD to 0
-  const CD = u !== 0 ? GetTotalDeficitCost(model, u, d, t2, t3, t4) : 0;
-  const CP = GetTotalProductionCost(k, f);
-  const CU = GetTotalUnitCost(a, c);
+  const CD = u !== 0 ? GetTotalDeficitCost(model, u, d, t2, t3, t4, decimals) : 0;
+  const CP = GetTotalProductionCost(k, f, decimals);
+  const CU = GetTotalUnitCost(a, c, decimals);
   const CT = CI + CD + CP + CU;
   // Returns Result Page
   return (

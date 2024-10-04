@@ -13,7 +13,7 @@ function VariablesPage({ searchParams }: Props) {
     typeof searchParams["model"] === "string"
       ? searchParams["model"]
       : "epq-w-d";
-  // Returns Variables Page 
+  // Returns Variables Page
   return (
     <Page
       title="Variables"
@@ -102,6 +102,15 @@ function VariablesPage({ searchParams }: Props) {
                 validation="number"
               />
             )}
+            {/* Number of Decimals Input */}
+            <Input
+              label="Cantidad de Decimales"
+              type="text"
+              name="decimals"
+              example="2"
+              help="Números Positivos Solamente"
+              validation="number"
+            />
           </div>
         </Form>
       </section>
