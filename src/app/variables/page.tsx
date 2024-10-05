@@ -13,7 +13,7 @@ function VariablesPage({ searchParams }: Props) {
     typeof searchParams["model"] === "string"
       ? searchParams["model"]
       : "epq-w-d";
-  // Returns Variables Page 
+  // Returns Variables Page
   return (
     <Page
       title="Variables"
@@ -102,6 +102,26 @@ function VariablesPage({ searchParams }: Props) {
                 validation="number"
               />
             )}
+            {/* Number of Decimals Input */}
+            <Input
+              label="Cantidad de Decimales"
+              type="text"
+              name="decimals"
+              example="2"
+              help="Números Positivos Solamente"
+              validation="number"
+            />
+            {/* Physics Units Rounded Checkbox Input */}
+            <section>
+              <label htmlFor="rounded">
+                Unidades Físicas
+                <div>
+                  <input id="rounded" name="rounded" type="checkbox" />
+                  <p>Redondear</p>
+                </div>
+              </label>
+              <small>Si no se marca, se muestra con decimales si posee</small>
+            </section>
           </div>
         </Form>
       </section>

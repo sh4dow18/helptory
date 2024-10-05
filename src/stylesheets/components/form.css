@@ -12,7 +12,7 @@
 
 /* Second Grade */
 
-.form-container div {
+.form-container > div {
   /* Display */
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -103,6 +103,36 @@
 .form-container section small {
   /* Texts */
   font-size: 0.9rem;
+}
+
+/* Fourth Grade */
+
+.form-container section label div:has(input[type="checkbox"]) {
+  /* Display */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  /* Spacers */
+  padding-block: 0.7rem;
+  margin-block: 5px;
+  /* Colors */
+  border: 1px solid var(--black);
+}
+
+/* Fifth Grade */
+
+.form-container section label div input[type="checkbox"] {
+  /* Display */
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  /* Spacers */
+  margin-inline: 0.5rem;
+}
+.form-container section label div p {
+  /* Texts */
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* Media Queries */
