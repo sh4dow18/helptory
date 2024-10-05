@@ -1,6 +1,13 @@
 // Fix Results Function to have a Number with the decimals that the user specifies
-function FixResult(result: number, decimals: number) {
-  return Number.parseFloat(result.toFixed(decimals));
+// Also, check if the user wants to round the number up or down.
+function FixResult(result: number, decimals: number, rounded?: "up" | "down") {
+  return Number.parseFloat(
+    rounded
+      ? rounded === "down"
+        ? Math.trunc(result).toString()
+        : Math.ceil(result).toString()
+      : result.toFixed(decimals)
+  );
 }
 // Get Optimal Production Lot Size Function
 export function GetOptimalProductionLotSizeQ(
@@ -10,7 +17,8 @@ export function GetOptimalProductionLotSizeQ(
   h: number,
   r: number,
   u: number,
-  decimals: number
+  decimals: number,
+  rounded?: boolean
 ) {
   const FIRST_PART = (2 * a * k) / h;
   let result = FIRST_PART;
@@ -24,7 +32,7 @@ export function GetOptimalProductionLotSizeQ(
     const THIRD_PART = (h + u) / u;
     result = result * THIRD_PART;
   }
-  return FixResult(Math.sqrt(result), decimals);
+  return FixResult(Math.sqrt(result), decimals, rounded ? "down" : undefined);
 }
 // Get Time Between Two Production Runs function
 export function GetTimeBetweenTwoProductionRunsT(
@@ -51,7 +59,8 @@ export function GetMaxDeficit(
   k: number,
   r: number,
   u: number,
-  decimals: number
+  decimals: number,
+  rounded?: boolean
 ) {
   const FIRST_PART = 2 * a * h * k;
   let secondPart = 1 - a / r;
@@ -60,7 +69,7 @@ export function GetMaxDeficit(
     secondPart = 1;
   }
   const RESULT = (FIRST_PART * secondPart) / THIRD_PART;
-  return FixResult(Math.sqrt(RESULT), decimals);
+  return FixResult(Math.sqrt(RESULT), decimals, rounded ? "up" : undefined);
 }
 // Get Second Time Interval
 export function GetSecondTimeIntervalt2(
@@ -95,7 +104,8 @@ export function GetMaxInventoryLevelS(
   a: number,
   t2: number,
   Q: number,
-  decimals: number
+  decimals: number,
+  rounded?: boolean
 ) {
   let result = a * t2;
   // If it is the EOQ with Deficit Model, change the formula to Q - a * t2
@@ -103,7 +113,7 @@ export function GetMaxInventoryLevelS(
   if (model.startsWith("eoq")) {
     result = model.endsWith("w-d") ? Q - result : Q;
   }
-  return FixResult(result, decimals);
+  return FixResult(result, decimals, rounded ? "down" : undefined);
 }
 // Get First Time Interval
 export function GetFirstTimeIntervalt1(

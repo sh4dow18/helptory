@@ -74,7 +74,7 @@ function Form({ api, method, button, modal, children }: Props) {
       if (REFERENCE.current) {
         // First, get every Input, Textarea and Select in the Form
         // Later, create a new key-value array with input name and aria-invalid attribute
-        // Finally, remove any element with the key name "model"
+        // Finally, remove any element with the key name "model" or "rounded"
         // Example: [ ["name", true], ["email", false] ]
         const inputsList = Array.from(
           REFERENCE.current.querySelectorAll<
@@ -85,7 +85,8 @@ function Form({ api, method, button, modal, children }: Props) {
             input.name,
             input.getAttribute("aria-invalid") === "false",
           ])
-          .filter((input) => input[0] !== "model");
+          .filter((input) => input[0] !== "model")
+          .filter((input) => input[0] !== "rounded")
         // Create a new object from a key-value array
         // Example: From [ ["name", true], ["email", false] ] to { name: true, email: false }
         const FORM_OBJECT = Object.fromEntries(inputsList);

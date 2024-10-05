@@ -111,6 +111,17 @@ function VariablesPage({ searchParams }: Props) {
               help="Números Positivos Solamente"
               validation="number"
             />
+            {/* Physics Units Rounded Checkbox Input */}
+            <section>
+              <label htmlFor="rounded">
+                Unidades Físicas
+                <div>
+                  <input id="rounded" name="rounded" type="checkbox" />
+                  <p>Redondear</p>
+                </div>
+              </label>
+              <small>Si no se marca, se muestra con decimales si posee</small>
+            </section>
           </div>
         </Form>
       </section>
